@@ -1,0 +1,2 @@
+- name: Import UFW tasks
+  ansible.builtin.import_tasks: ufw.yml

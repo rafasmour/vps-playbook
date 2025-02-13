@@ -1,0 +1,5 @@
+- name: Import user tasks
+  ansible.builtin.import_tasks: user.yml
+
+- name: Import public keys tasks
+  ansible.builtin.import_tasks: public_keys.yml

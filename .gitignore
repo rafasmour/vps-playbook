@@ -1,0 +1,11 @@
+*
+!.github
+!.github/**/*
+!.gitignore
+!roles
+!roles/**/*
+!README.md
+!inventory.yml
+!main.yml
+!requirements.yml
+!LICENSE
