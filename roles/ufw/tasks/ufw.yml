@@ -1,0 +1,25 @@
+- name: Install UFW package
+  ansible.builtin.apt:
+    name: ufw
+    state: present
+
+- name: UFW deny all except SSH
+  community.general.ufw:
+    state: enabled
+    policy: deny
+    rule: allow
+    port: "{{ ports.ssh }}"
+
+- name: UFW Allow HTTP and HTTPS
+  community.general.ufw:
+    state: enabled
+    rule: limit
+    port: "{{ item }}"
+  with_items:
+    - "{{ ports.http }}"
+    - "{{ ports.https }}"
+
+- name: Restart UFW service
+  ansible.builtin.service:
+    name: ufw
+    state: restarted

@@ -1,0 +1,25 @@
+- name: Ensure the user exists
+  ansible.builtin.user:
+    name: "{{ username }}"
+    state: present
+
+- name: Create the .ssh directory
+  ansible.builtin.file:
+    path: "/home/{{ username }}/.ssh"
+    state: directory
+    owner: "{{ username }}"
+    mode: '0700'
+
+- name: Add the public keys to the authorized_keys file
+  ansible.builtin.blockinfile:
+    path: "/home/{{ username }}/.ssh/authorized_keys"
+    block: "{{ authorized_key }}"
+    create: true
+    owner: "{{ username }}"
+    mode: '0600'
+  register: pubkey_install
+
+- name: Echo success message if public key was added
+  ansible.builtin.debug:
+    msg: "Public key installed successfully."
+  when: pubkey_install.changed

@@ -1,0 +1,29 @@
+- name: Remove default debian packaged docker
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: absent
+  loop:
+    - docker
+    - docker-engine
+
+- name: Add Docker GPG apt Key
+  ansible.builtin.apt_key:
+    url: https://download.docker.com/linux/ubuntu/gpg
+    state: present
+
+- name: Add Docker Repository
+  ansible.builtin.apt_repository:
+    repo: "deb [arch=amd64] https://download.docker.com/linux/ubuntu focal stable"
+    state: present
+
+- name: Install Docker packages
+  ansible.builtin.apt:
+    name: "{{ item }}"
+    state: present
+    update_cache: true
+  loop:
+    - docker-ce
+    - docker-ce-cli
+    - containerd.io
+    - docker-buildx-plugin
+    - docker-compose-plugin

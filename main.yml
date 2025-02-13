@@ -1,0 +1,24 @@
+- name: Create user
+  hosts: vps
+  remote_user: root
+  become: true
+  # gather_facts: no  # Uncomment if needed
+  roles:
+    - role: user
+      tags:
+        - user
+
+- name: Server setup
+  hosts: vps
+  remote_user: "{{ username }}"
+  become: true
+  roles:
+    - role: ssh
+      tags:
+        - ssh
+    - role: ufw
+      tags:
+        - firewall
+    - role: docker
+      tags:
+        - docker
