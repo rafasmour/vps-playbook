@@ -12,9 +12,4 @@
     src: 'sshd_conf.j2'
     dest: '/etc/ssh/sshd_config'
     mode: '0644'
-    owner: '{{ username }}'
-
-- name: Restart ssh service
-  ansible.builtin.service:
-    name: ssh
-    state: restarted
+    owner: '{{ users[0].name }}'
