@@ -50,15 +50,15 @@ The tests will be done with Molecule on docker ubuntu containers
 ### Skills required before getting started:
  - [X] Github Actions
  - [X] Ansible
- - [ ] GitHub Repository Rules
+ - [X] GitHub Repository Rules
  - [X] Git
  - [ ] Molecule
  - [X] CI/CD
- - [ ] Best Practices 
+ - [X] Best Practices 
 
 ### Things to consider/read before starting (for rafasmour):
- - [ ] Get a coffee ☕
- - [ ] Read about github rules
+ - [X] Get a coffee ☕
+ - [X] Read about github rules
  - [ ] Read about Github action import from private repos
  - [ ] Read about Molecule
  - [ ] Plan the structure of the playbook
