@@ -3,10 +3,14 @@
   remote_user: root
   become: true
   # gather_facts: no  # Uncomment if needed
-  roles:
-    - role: user
-      tags:
-        - user
+  tasks:
+    - name: Run User role for every user defined
+      include_role:
+        name: user
+      loop: "{{ users }}"
+      loop_control:
+        loop_var: user
+      
 
 - name: Server setup
   hosts: vps

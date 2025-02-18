@@ -18,8 +18,4 @@
   with_items:
     - "{{ ports.http }}"
     - "{{ ports.https }}"
-
-- name: Restart UFW service
-  ansible.builtin.service:
-    name: ufw
-    state: restarted
+  notify: Restart UFW service
