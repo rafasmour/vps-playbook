@@ -17,9 +17,3 @@
     create: true
     owner: "{{ username }}"
     mode: '0600'
-  register: pubkey_install
-
-- name: Echo success message if public key was added
-  ansible.builtin.debug:
-    msg: "Public key installed successfully."
-  when: pubkey_install.changed

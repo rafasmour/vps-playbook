@@ -13,3 +13,4 @@
     dest: '/etc/ssh/ssh_config'
     mode: '0644'
     owner: '{{ username }}'
+  notify: Restart ssh service

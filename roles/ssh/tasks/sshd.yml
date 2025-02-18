@@ -13,8 +13,4 @@
     dest: '/etc/ssh/sshd_config'
     mode: '0644'
     owner: '{{ username }}'
-
-- name: Restart ssh service
-  ansible.builtin.service:
-    name: ssh
-    state: restarted
+  notify: Restart sshd service
