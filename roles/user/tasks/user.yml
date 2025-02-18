@@ -3,18 +3,26 @@
     name: docker
     state: present
 
-- name: "Create user {{ username }}"
+- name: "Create user {{ user.name }}"
   ansible.builtin.user:
-    name: "{{ username }}"
+    name: "{{ user.name }}"
     groups:
-      - sudo
       - docker
     system: true
-    home: "/home/{{ username }}"
 
-- name: "Password-less sudo for {{ username }}"
+- name: "Create user {{ user.name }}"
+  ansible.builtin.user:
+    name: "{{ user.name }}"
+    groups:
+      - sudo
+    system: true
+    append: true
+  when: user.sudo
+
+- name: "Password-less sudo for {{ user.name }}"
   ansible.builtin.lineinfile:
     dest: /etc/sudoers
-    regexp: "^{{ username }}"
-    line: "{{ username }} ALL=(ALL) NOPASSWD: ALL"
+    regexp: "^{{ user.name }}"
+    line: "{{ user.name }} ALL=(ALL) NOPASSWD: ALL"
     validate: "/usr/sbin/visudo -cf %s"
+  when: user.sudo
