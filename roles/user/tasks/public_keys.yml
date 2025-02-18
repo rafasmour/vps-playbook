@@ -13,7 +13,7 @@
 - name: Add the public keys to the authorized_keys file
   ansible.builtin.blockinfile:
     path: "/home/{{ user.name }}/.ssh/authorized_keys"
-    block: "{{ user.authorized_key }}"
+    block: "{{ user.authorized_keys }}"
     create: true
     owner: "{{ user.name }}"
     mode: '0600'

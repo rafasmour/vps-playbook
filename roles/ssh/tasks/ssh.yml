@@ -12,5 +12,5 @@
     src: 'ssh_conf.j2'
     dest: '/etc/ssh/ssh_config'
     mode: '0644'
-    owner: '{{ username }}'
+    owner: '{{ users[0].name }}'
   notify: Restart ssh service

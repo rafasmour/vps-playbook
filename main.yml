@@ -12,15 +12,18 @@
 
 - name: Server setup
   hosts: vps
-  remote_user: "{{ username }}"
+  remote_user: "{{ users[0].name }}"
   become: true
   roles:
-    - role: ssh
-      tags:
-        - ssh
     - role: ufw
+      become: true
       tags:
         - firewall
+    - role: ssh
+      become: true
+      tags:
+        - ssh
     - role: docker
+      become: true
       tags:
         - docker
