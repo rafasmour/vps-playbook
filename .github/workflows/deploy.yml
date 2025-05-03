@@ -10,17 +10,13 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-
-      - name: Run Alpine Container
-        uses: addnab/docker-run-action@v3
+      - uses: jirutka/setup-alpine@v1
         with:
-          image: alpine:latest
-          options: --rm
-          run: |
-            echo "Running Alpine Linux"
-            apk add --no-cache bash
-            echo "Alpine setup complete"
+          branch: v3.15
+    
+      - run: cat /etc/alpine-release
+        shell: alpine.sh {0}
+        
       - uses: actions/setup-python@v5
         with:
           python-version: '3.13'
