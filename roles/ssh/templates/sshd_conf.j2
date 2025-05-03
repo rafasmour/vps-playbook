@@ -1,15 +1,5 @@
-# Authentication:
+Port {{ ports.ssh }}
 PermitRootLogin no
-
-# Authentication
 PubkeyAuthentication yes
-AuthorizedKeysFile %h/.ssh/authorized_keys
-KbdInteractiveAuthentication no
-X11Forwarding yes
-PrintMotd no
-
-# Allow client to pass locale environment variables
-AcceptEnv LANG LC_*
-
-# override default of no subsystems
-Subsystem       sftp    /usr/lib/openssh/sftp-server
+AuthorizedKeysFile ~/.ssh/authorized_keys
+PasswordAuthentication no
