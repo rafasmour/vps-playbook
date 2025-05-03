@@ -8,10 +8,19 @@ on:
 
 jobs:
   build:
-    runs-on: alpine:latest
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
 
+      - name: Run Alpine Container
+        uses: addnab/docker-run-action@v3
+        with:
+          image: alpine:latest
+          options: --rm
+          run: |
+            echo "Running Alpine Linux"
+            apk add --no-cache bash
+            echo "Alpine setup complete"
       - uses: actions/setup-python@v5
         with:
           python-version: '3.13'
