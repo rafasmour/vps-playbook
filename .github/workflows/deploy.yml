@@ -7,13 +7,14 @@ on:
       - main
 
 jobs:
+  checkout:
+    uses: rafasmour/actions/.github/workflows/ssh.yml@main
+    with:
+      vps_ip: ${{ secrets.VPS_IP }}
   build:
     runs-on: ubuntu-latest
     steps:
-      - name: Setup SSH Key
-        with:
-          vps_ip: ${{ secrets.VPS_IP }}
-        uses: rafasmour/actions/.github/workflows/ssh.yml@main
+        
       - uses: jirutka/setup-alpine@v1
         with:
           branch: v3.15
