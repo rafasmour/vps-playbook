@@ -10,6 +10,10 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
+      - name: Setup SSH Key
+        with:
+          vps_ip: ${{ secrets.VPS_IP }}
+        uses: rafasmour/actions/.github/workflows/ssh.yml@main
       - uses: jirutka/setup-alpine@v1
         with:
           branch: v3.15
@@ -38,23 +42,6 @@ jobs:
         run: |
           ansible-lint
 
-      - name: Setup SSH Key
-        with:
-          vps_ip: ${{ secrets.VPS_IP }}
-        uses: rafasmour/actions/.github/workflows/ssh.yml@main
+      
 
-      - name: Cache ssh key passphrase & Run Ansible Playbook
-        env:
-          AUTHORIZED_KEYS_USER: ${{ secrets.AUTHORIZED_KEYS_USER }}
-          AUTHORIZED_KEYS_DEPLOYER: ${{ secrets.AUTHORIZED_KEYS_DEPLOYER }}
-          SSH_PASSPHRASE: ${{ secrets.DEPLOY_SSH_PASSPHRASE }}
-          USER: ${{ secrets.USER }}
-          VPS_IP: ${{ secrets.VPS_IP }}
-        run: |
-            eval "$(ssh-agent -s)"
-            echo "echo \"$SSH_PASSPHRASE\"" > ./askpass.sh
-            chmod +x ./askpass.sh
-            export SSH_ASKPASS=./askpass.sh
-            export DISPLAY=:0
-            setsid ssh-add /home/runner/.ssh/id_rsa < /dev/null
-            ansible-playbook -i inventory.yml -vvv main.yml
+      
