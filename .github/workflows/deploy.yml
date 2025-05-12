@@ -41,7 +41,7 @@ jobs:
       - name: Setup SSH Key
         with:
           vps_ip: ${{ secrets.VPS_IP }}
-        uses: rafasmour/actions/.github/actions/ssh.yml@main
+        uses: rafasmour/actions/.github/workflows/ssh.yml@main
 
       - name: Cache ssh key passphrase & Run Ansible Playbook
         env:
