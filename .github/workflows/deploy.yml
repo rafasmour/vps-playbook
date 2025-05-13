@@ -7,20 +7,13 @@ on:
       - main
 
 jobs:
-  checkout:
-    uses: rafasmour/actions/.github/workflows/ssh.yml@main
-    with:
-      vps_ip: ${{ secrets.VPS_IP }}
   build:
     runs-on: ubuntu-latest
     steps:
         
-      - uses: jirutka/setup-alpine@v1
+      - uses: rafasmour/actions/.github/workflows/ssh.yml@main
         with:
-          branch: v3.15
- 
-      - run: cat /etc/alpine-release
-        shell: alpine.sh {0}
+          vps_ip: ${{ secrets.VPS_IP }}
         
       - uses: actions/setup-python@v5
         with:
