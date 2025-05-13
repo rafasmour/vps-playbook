@@ -11,6 +11,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: Setup Alpine
         uses: jirutka/setup-alpine@v1
         with:
@@ -20,7 +21,7 @@ jobs:
         run: cat /etc/alpine-release
         shell: alpine.sh {0}
         
-      - uses: rafasmour/actions/.github/actions/ssh.yml@c710adecf52c71111aad92d315539fdac8bbb631
+      - uses: rafasmour/actions/.github/actions/ssh.yml@v1
         with:
           vps_ip: ${{ secrets.VPS_IP }}
         
@@ -30,8 +31,8 @@ jobs:
 
       - name: Install Ansible and Ansible-lint
         run: |
-          sudo apk update
-          sudo apk add -y pipx
+          apk update
+          apk add -y pipx
           pipx install ansible-core
           pipx install ansible-lint
 
@@ -39,7 +40,7 @@ jobs:
         run: |
           ansible-galaxy collection install community.general
           ansible-galaxy collection install ansible.posix
-          sudo apk update && upgrade -y
+          apk update && upgrade -y
 
       - name: Run ansible-lint
         run: |
