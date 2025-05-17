@@ -20,7 +20,7 @@ jobs:
         run: cat /etc/alpine-release
         shell: alpine.sh {0}
         
-      - uses: ./github/actions/ssh.yml
+      - uses: ./github/actions/action.yml
         with:
           vps_ip: ${{ secrets.VPS_IP }}
         
