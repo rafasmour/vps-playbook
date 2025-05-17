@@ -20,6 +20,7 @@ jobs:
             ansible-core
             ansible-lint
             python3
+            pip3
   
       - name: Verify Alpine Release
         run: cat /etc/alpine-release
