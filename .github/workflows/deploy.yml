@@ -31,6 +31,7 @@ jobs:
           python-version: '3.13'
 
       - name: Install Ansible and Ansible-lint
+        shell: alpine.sh {0}
         run: |
           apk update
           apk add -y pipx
@@ -38,12 +39,14 @@ jobs:
           pipx install ansible-lint
 
       - name: Download Ansible community.general and ansible.posix libraries
+        shell: alpine.sh {0}
         run: |
           ansible-galaxy collection install community.general
           ansible-galaxy collection install ansible.posix
           apk update && upgrade -y
 
       - name: Run ansible-lint
+        shell: alpine.sh {0}
         run: |
           ansible-lint
 
