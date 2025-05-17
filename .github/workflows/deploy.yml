@@ -20,7 +20,7 @@ jobs:
             ansible-core
             ansible-lint
             python3
-            pip3
+            py3-pip
   
       - name: Verify Alpine Release
         run: cat /etc/alpine-release
@@ -35,7 +35,6 @@ jobs:
         shell: alpine.sh --root {0}
         run: |
           python3 --version
-          pip3 install --upgrade pip
           ansible-galaxy collection install -r requirements.yml -vvv
 
       - name: Run ansible-lint
