@@ -15,6 +15,16 @@ jobs:
         uses: jirutka/setup-alpine@v1
         with:
           branch: "v3.15"
+          packages: >
+            openssh
+            python3
+            python3-dev
+            py3-pip
+            py3-pipx
+            git
+            ansible-lint
+            ansible-core
+            ansible-posix
   
       - name: Verify Alpine Release
         run: cat /etc/alpine-release
