@@ -40,7 +40,7 @@ jobs:
           pipx install ansible-lint
 
       - name: Download Ansible community.general and ansible.posix libraries
-        shell: alpine.sh {0}
+        shell: alpine.sh --root {0}
         run: |
           ansible-galaxy collection install community.general
           ansible-galaxy collection install ansible.posix
