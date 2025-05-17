@@ -33,7 +33,6 @@ jobs:
       - name: Install Ansible and Ansible-lint
         shell: alpine.sh {0}
         run: |
-          apk update
           apk add -y pipx
           pipx install ansible-core
           pipx install ansible-lint
@@ -43,7 +42,6 @@ jobs:
         run: |
           ansible-galaxy collection install community.general
           ansible-galaxy collection install ansible.posix
-          apk update && upgrade -y
 
       - name: Run ansible-lint
         shell: alpine.sh {0}
