@@ -17,6 +17,9 @@ jobs:
           branch: "v3.15"
           packages: >
             openssh
+            ansible-core
+            ansible-lint
+            python3
   
       - name: Verify Alpine Release
         run: cat /etc/alpine-release
@@ -26,18 +29,6 @@ jobs:
         with:
           host: ${{ secrets.VPS_IP }}
           DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
-
-
-      - uses: actions/setup-python@v5
-        with:
-          python-version: '3.13'
-
-      - name: Install Ansible and Ansible-lint
-        shell: alpine.sh --root {0}
-        run: |
-          apk add pipx
-          pipx install ansible-core
-          pipx install ansible-lint
 
       - name: Download Ansible community.general and ansible.posix libraries
         shell: alpine.sh --root {0}
