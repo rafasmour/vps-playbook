@@ -26,4 +26,3 @@ runs:
         chmod 644 /home/runner/.ssh/known_hosts
         ssh-keyscan -H $HOST >> /home/runner/.ssh/known_hosts
         rm -f /temp/askpass.sh
-        sudo apt-get update
