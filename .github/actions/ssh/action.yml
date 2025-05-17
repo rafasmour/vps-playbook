@@ -5,14 +5,18 @@ inputs:
   host:
     description: "The host to add to known_hosts."
     required: true
+  DEPLOY_SSH_KEY:
+    description: "The SSH private key to use for deployment."
+    required: true
 
 runs:
   using: "composite"
   steps:
     - name: Setup SSH Key
       env:
-        SSH_PRIVATE_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+        SSH_PRIVATE_KEY: ${{ inputs.DEPLOY_SSH_KEY }}
         HOST: ${{ inputs.host }}
+      shell: bash
       run: |
         mkdir -p /home/runner/.ssh
         apk update

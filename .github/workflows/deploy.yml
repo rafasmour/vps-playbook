@@ -20,9 +20,11 @@ jobs:
         run: cat /etc/alpine-release
         shell: alpine.sh {0}
         
-      - uses: ./.github/actions
+      - uses: ./.github/actions/ssh
         with:
           host: ${{ secrets.VPS_IP }}
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+
 
       - uses: actions/setup-python@v5
         with:
