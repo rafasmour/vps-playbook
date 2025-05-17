@@ -16,7 +16,7 @@ runs:
       env:
         SSH_PRIVATE_KEY: ${{ inputs.DEPLOY_SSH_KEY }}
         HOST: ${{ inputs.host }}
-      shell: alpine.sh {0}
+      shell: alpine.sh --root {0}
       run: |
         mkdir -p /home/runner/.ssh
         apk update
