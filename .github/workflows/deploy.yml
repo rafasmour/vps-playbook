@@ -33,15 +33,15 @@ jobs:
 
       - name: Download Ansible community.general and ansible.posix libraries
         shell: alpine.sh --root {0}
+        working-directory: /home/runner/work/vps-playbook/vps-playbook/
         run: |
           python3 --version
-          cd /home/runner/work/vps-playbook/vps-playbook/
           ansible-galaxy collection install -r requirements.yml -vvv
 
       - name: Run ansible-lint
         shell: alpine.sh {0}
+        working-directory: /home/runner/work/vps-playbook/vps-playbook/
         run: |
-          cd /home/runner/work/vps-playbook/vps-playbook/
           ansible-lint
 
       
