@@ -33,7 +33,7 @@ jobs:
           python-version: '3.13'
 
       - name: Install Ansible and Ansible-lint
-        shell: alpine.sh {0}
+        shell: alpine.sh --root {0}
         run: |
           apk add pipx
           pipx install ansible-core
