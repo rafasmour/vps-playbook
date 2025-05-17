@@ -33,6 +33,8 @@ jobs:
       - name: Download Ansible community.general and ansible.posix libraries
         shell: alpine.sh --root {0}
         run: |
+          python3 --version
+          pip3 install --upgrade pip
           ansible-galaxy collection install -r requirements.yml -vvv
 
       - name: Run ansible-lint
