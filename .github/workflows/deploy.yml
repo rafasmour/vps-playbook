@@ -11,17 +11,22 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
-      - name: Run Alpine Container
-        uses: addnab/docker-run-action@v3
         with:
-          image: alpine:latest
-          options: --rm
-          run: |
-            echo "Running Alpine Linux"
-            apk add --no-cache bash
-            echo "Alpine setup complete"
-
+          repository: rafasmour/action
+          token: ${{ secrets.ACTIONS_PAT }}
+      - name: Setup Alpine
+        uses: jirutka/setup-alpine@v1
+        with:
+          branch: "v3.15"
+  
+      - name: Verify Alpine Release
+        run: cat /etc/alpine-release
+        shell: alpine.sh {0}
+        
+      - uses: rafasmour/actions@main
+        with:
+          vps_ip: ${{ secrets.VPS_IP }}
+        
       - uses: actions/setup-python@v5
         with:
           python-version: '3.13'
@@ -37,29 +42,12 @@ jobs:
         run: |
           ansible-galaxy collection install community.general
           ansible-galaxy collection install ansible.posix
-          sudo apk update && upgrade -y
+          apk update && upgrade -y
 
       - name: Run ansible-lint
         run: |
           ansible-lint
 
-      - name: Setup SSH Key
-        with:
-          vps_ip: ${{ secrets.VPS_IP }}
-        uses: rafasmour/action/.github/actions/ssh.yml@main
+      
 
-      - name: Cache ssh key passphrase & Run Ansible Playbook
-        env:
-          AUTHORIZED_KEYS_USER: ${{ secrets.AUTHORIZED_KEYS_USER }}
-          AUTHORIZED_KEYS_DEPLOYER: ${{ secrets.AUTHORIZED_KEYS_DEPLOYER }}
-          SSH_PASSPHRASE: ${{ secrets.DEPLOY_SSH_PASSPHRASE }}
-          USER: ${{ secrets.USER }}
-          VPS_IP: ${{ secrets.VPS_IP }}
-        run: |
-            eval "$(ssh-agent -s)"
-            echo "echo \"$SSH_PASSPHRASE\"" > ./askpass.sh
-            chmod +x ./askpass.sh
-            export SSH_ASKPASS=./askpass.sh
-            export DISPLAY=:0
-            setsid ssh-add /home/runner/.ssh/id_rsa < /dev/null
-            ansible-playbook -i inventory.yml -vvv main.yml
+      
