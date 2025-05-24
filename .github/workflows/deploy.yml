@@ -59,18 +59,11 @@ jobs:
         env:
           AUTHORIZED_KEYS_USER: ${{ secrets.AUTHORIZED_KEYS_USER }}
           AUTHORIZED_KEYS_DEPLOYER: ${{ secrets.AUTHORIZED_KEYS_DEPLOYER }}
-          SSH_PRIVATE_KEY: ${{ secrets.DEPLOYER_SSH_KEY }}
           SSH_PASSPHRASE: ${{ secrets.DEPLOY_SSH_PASSPHRASE }}
           USER: ${{ secrets.USER }}
           VPS_IP: ${{ secrets.VPS_IP }}
+        shell: alpine.sh --root {0}
         run: |
-          mkdir -p /home/runner/.ssh
-          apk update
-          echo "$SSH_PRIVATE_KEY" > /home/runner/.ssh/id_rsa
-          chmod 600 /home/runner/.ssh/id_rsa
-          touch /home/runner/.ssh/known_hosts
-          chmod 644 /home/runner/.ssh/known_hosts
-          ssh-keyscan -H $VPS_IP >> /home/runner/.ssh/known_hosts
           eval "$(ssh-agent -s)"
           echo "echo \"$SSH_PASSPHRASE\"" > ./askpass.sh
           chmod +x ./askpass.sh
