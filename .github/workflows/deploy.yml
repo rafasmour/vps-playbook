@@ -55,16 +55,6 @@ jobs:
           chmod 644 /home/runner/.ssh/known_hosts
           ssh-keyscan -H $HOST >> /home/runner/.ssh/known_hosts
 
-        shell: alpine.sh --root {0}
-        run: |
-          mkdir -p /home/runner/.ssh
-          apk update
-          echo "$SSH_PRIVATE_KEY" > /home/runner/.ssh/id_rsa
-          chmod 600 /home/runner/.ssh/id_rsa
-          touch /home/runner/.ssh/known_hosts
-          chmod 644 /home/runner/.ssh/known_hosts
-          ssh-keyscan -H $HOST >> /home/runner/.ssh/known_hosts
-
       - name: Cache ssh key passphrase & Run Ansible Playbook
         env:
           AUTHORIZED_KEYS_USER: ${{ secrets.AUTHORIZED_KEYS_USER }}
