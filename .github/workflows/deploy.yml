@@ -59,7 +59,11 @@ jobs:
           touch /home/runner/.ssh/known_hosts
           chmod 644 /home/runner/.ssh/known_hosts
           ssh-keyscan -H $HOST >> /home/runner/.ssh/known_hosts
-          rm -f /temp/askpass.sh
+
+      - name: Debug SSH Key
+        run: |
+          ls -la /home/runner/.ssh
+        shell: alpine.sh --root {0}
 
       - name: Cache ssh key passphrase & Run Ansible Playbook
         env:
