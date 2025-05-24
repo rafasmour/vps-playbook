@@ -1,5 +1,26 @@
+# Security settings
 Port {{ ports.ssh }}
+Protocol 2
 PermitRootLogin no
 PubkeyAuthentication yes
-AuthorizedKeysFile ~/.ssh/authorized_keys
 PasswordAuthentication no
+PermitEmptyPasswords no
+ChallengeResponseAuthentication no
+UsePAM yes
+
+# Key authentication settings
+AuthorizedKeysFile .ssh/authorized_keys
+
+# Hardening options
+HostbasedAuthentication no
+IgnoreRhosts yes
+X11Forwarding no
+PrintMotd no
+MaxAuthTries 3
+MaxSessions 10
+ClientAliveInterval 300
+ClientAliveCountMax 0
+
+# Logging
+SyslogFacility AUTH
+LogLevel INFO
