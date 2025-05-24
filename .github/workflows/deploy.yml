@@ -14,10 +14,11 @@ jobs:
       - name: Setup Alpine
         uses: jirutka/setup-alpine@v1
         with:
-          branch: "v3.21.3"
+          branch: "v3.20.6"
           packages: >
             openssh
             python3
+            py3-pip
             ansible-core
             ansible-lint
 
