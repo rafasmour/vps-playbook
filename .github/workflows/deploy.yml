@@ -61,4 +61,4 @@ jobs:
           export SSH_ASKPASS=./askpass.sh
           export DISPLAY=:0
           setsid ssh-add /home/runner/.ssh/id_rsa < /dev/null
-          ansible-playbook -i inventory.yml -vvv main.yml
+          ansible-playbook -i inventory.yml -vvvvvvvv main.yml
