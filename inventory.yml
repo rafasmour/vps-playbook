@@ -7,7 +7,7 @@ all:
         users:
             - name: "{{ lookup('ansible.builtin.env', 'USER') }}"
               sudo: true
-              authorized_keys: "{{ lookup('ansible.builtin.env', 'AUTHORIZED_KEYS_RAFAEL') }}"
+              authorized_keys: "{{ lookup('ansible.builtin.env', 'AUTHORIZED_KEYS_USER') }}"
             - name: "deployer"
               sudo: false
               authorized_keys: "{{ lookup('ansible.builtin.env', 'AUTHORIZED_KEYS_DEPLOYER') }}"
