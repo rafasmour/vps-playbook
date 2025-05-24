@@ -65,7 +65,7 @@ jobs:
         shell: alpine.sh --root {0}
         run: |
           eval "$(ssh-agent -s)"
-          echo $SSH_PASSPHRASE > ./askpass.sh
+          echo "echo \"$SSH_PASSPHRASE\"" > ./askpass.sh
           chmod +x ./askpass.sh
           export SSH_ASKPASS=./askpass.sh
           export DISPLAY=:0
