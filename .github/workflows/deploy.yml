@@ -14,13 +14,13 @@ jobs:
       - name: Setup Alpine
         uses: jirutka/setup-alpine@v1
         with:
-          branch: "v3.20.6"
+          branch: "v3.21.3"
           packages: >
             openssh
-            python3
-            py3-pip
             ansible-core
             ansible-lint
+            python3
+            py3-pip
 
       - name: Verify Alpine Release
         run: cat /etc/alpine-release
