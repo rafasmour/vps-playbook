@@ -14,7 +14,7 @@ jobs:
       - name: Setup Alpine
         uses: jirutka/setup-alpine@v1
         with:
-          branch: "v3.19.7"
+          branch: "v3.18"
           packages: >
             openssh
             ansible-core
