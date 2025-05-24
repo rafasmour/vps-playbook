@@ -22,14 +22,14 @@ jobs:
             python3
             py3-pip
 
-      - name: Setup SSH Key
-        env:
-          SSH_PRIVATE_KEY: ${{ inputs.DEPLOY_SSH_KEY }}
-          HOST: ${{ inputs.host }}
-
       - name: Verify Alpine Release
         run: cat /etc/alpine-release
         shell: alpine.sh {0}
+
+      - uses: ./.github/actions/ssh
+        with:
+          host: ${{ secrets.VPS_IP }}
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
 
       - name: Download Ansible community.general and ansible.posix libraries
         shell: alpine.sh --root {0}
