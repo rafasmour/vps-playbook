@@ -41,6 +41,11 @@ jobs:
         run: |
           ansible-lint
 
+      - name: Debug SSH Key
+        run: |
+          ls -la /home/runner/.ssh
+        shell: alpine.sh --root {0}
+
       - name: Cache ssh key passphrase & Run Ansible Playbook
         env:
           AUTHORIZED_KEYS_USER: ${{ secrets.AUTHORIZED_KEYS_USER }}
