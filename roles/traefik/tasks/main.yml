@@ -1,0 +1,4 @@
+- name: Import git tasks
+  ansible.builtin.import_tasks: git.yml
+- name: Import deployment tasks
+  ansible.builtin.import_tasks: deployment.yml
