@@ -53,6 +53,7 @@ jobs:
           SSH_PASSPHRASE: ${{ secrets.DEPLOY_SSH_PASSPHRASE }}
           USER: ${{ secrets.USER }}
           VPS_IP: ${{ secrets.VPS_IP }}
+          ANSIBLE_HOST_KEY_CHECKING: "False"
         shell: alpine.sh --root {0}
         run: |
           eval "$(ssh-agent -s)"
