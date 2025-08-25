@@ -12,7 +12,7 @@
 
 - name: Server setup
   hosts: vps
-  remote_user: "{{ users[0].name }}"
+  remote_user: root
   become: true
   roles:
     - role: ufw
