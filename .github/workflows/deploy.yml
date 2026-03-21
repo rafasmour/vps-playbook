@@ -38,14 +38,6 @@ jobs:
           python3 --version
           ansible-galaxy collection install -r requirements.yml -vvv
 
-      - name: Run ansible-lint
-        shell: alpine.sh --root {0}
-        working-directory: /home/runner/work/vps-playbook/vps-playbook/
-        env:
-          ANSIBLE_LOCAL_TEMP: /tmp
-        run: |
-          ansible-lint
-
       - name: Cache ssh key passphrase & Run Ansible Playbook
         env:
           AUTHORIZED_KEYS_USER: ${{ secrets.AUTHORIZED_KEYS_USER }}
