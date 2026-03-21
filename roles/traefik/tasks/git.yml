@@ -1,0 +1,14 @@
+- name: Ensure repos directory exists
+  ansible.builtin.file:
+    path: "{{ traefik_directory | default('/opt/repos') }}"
+    state: directory
+    mode: '0755'
+    owner: "{{ users[0].name }}"
+    group: "{{ users[0].name }}"
+
+- name: Pull Traefik repository
+  ansible.builtin.git:
+    repo: "https://github.com/rafasmour/traefik.git"
+    dest: "{{ traefik_directory | default('/opt/repos') }}/traefik"
+    clone: true
+    update: true
